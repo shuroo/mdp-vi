@@ -4,35 +4,40 @@ import java.util.HashSet;
 
 public class Vertex<T> {
 
-    private java.lang.String identifier;
+    private boolean isInitial;
 
-    private Boolean isInitial;
+    private boolean isFinal;
 
-    private Boolean isFinal;
+    private String identifier;
 
-    public Boolean isInitial() {
-        return isInitial;
-    }
-
-    public Boolean isFinal() {
-        return isFinal;
-    }
-
-    public java.lang.String getIdentifier() {
+    @Override
+    public String toString(){
         return identifier;
     }
 
-    public Vertex(String id){
-        this.identifier = id;
+    // todo: put in private
+    public boolean isInitial() {
+        return isInitial;
+    }
+
+    // todo: put in private
+    public boolean isFinal() {
+        return isFinal;
     }
 
     public HashSet<Edge> vertexEdges = null;
 
-    public Vertex(java.lang.String identifier, Boolean isInitial, Boolean isFinal){
+    public Vertex( String identifier, Boolean isInitial, Boolean isFinal){
 
         this.identifier = identifier;
         this.isInitial = isInitial;
         this.isFinal = isFinal;
+        this.vertexEdges = new HashSet<Edge>();
+    }
+
+    //default constructor - used by the gson lib when converting from json.
+    public Vertex(){
+
         this.vertexEdges = new HashSet<Edge>();
     }
 

@@ -20,7 +20,8 @@ public class GraphReader {
 
         List<Edge> edges = (List<Edge>) g.getEdges().values().stream().collect(Collectors.toList());
         for (Edge edge : edges) {
-            Action action = new Action(new MDPEdge(edge));
+            MDPEdge mdpe = MDPEdge.mdpeFromEdge(edge);
+            Action action = new Action(mdpe);
             actions.put(action.getActionId(), action);
         }
 
@@ -42,7 +43,7 @@ public class GraphReader {
             Edge edge = edges.remove(0);
             //for(Edge edge : edges){
 
-            MDPEdge mdpedge = new MDPEdge(edge);
+            MDPEdge mdpedge = MDPEdge.mdpeFromEdge(edge);
             MDPStatusEdge es = new MDPStatusEdge(mdpedge, BlockingStatus.Closed);
 
             // (e1,c)p=...,(e1,o),(e1,u)

@@ -24,8 +24,8 @@ public class MDPEdge{
          this.id=this.src.getId()+"_"+this.dst.getId();
     }
 
-    public MDPEdge(Edge edge){
-         new MDPEdge(new MDPVertex(edge.getSource().getIdentifier()),
+    public static MDPEdge mdpeFromEdge(Edge edge){
+        return new MDPEdge(new MDPVertex(edge.getSource().toString()),
                 new MDPVertex(edge.getTarget().toString()),
                 edge.getReward(),
                 edge.getBlockingProbability(),
@@ -44,7 +44,7 @@ public class MDPEdge{
             this.blockingProbability = prob;
             this.reward = reward;
             this.status = status;
-            setID();
+            this.setID();
     }
 
     @Override
