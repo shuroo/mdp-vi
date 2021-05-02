@@ -111,8 +111,9 @@ public class GraphReader {
         // SnapshotRunner sr = new SnapshotRunner("graphs_data/default_graph_input.json");
 
         /// Dror's first Graph Example
-        Graph gr = new Graph("graphs_data/default_graph_input.json");
+        //Graph gr = new Graph("graphs_data/default_graph_input.json");
 
+        Graph gr = new Graph("graphs_data/very_basic_mdp_example_graphs/very_simple_example_18_states.json");
         // "default_graph_input.json"
         GraphReader.GraphToMDP(gr);
         /// Dror's second Graph Example
