@@ -11,6 +11,12 @@ public class State {
 
     private String stateId;
 
+    public void setAgentLocation(MDPVertex agentLocation) {
+        this.agentLocation = agentLocation;
+        setStateId();
+
+    }
+
     public MDPVertex getAgentLocation() {
         return agentLocation;
     }
@@ -43,7 +49,7 @@ public class State {
     // Vector of edgeStatuses
     Vector<MDPStatusEdge> edgeStatuses;
 
-    private void buildStateId() {
+    private void setStateId() {
         StringBuilder uniqueStateStr = new StringBuilder();
         uniqueStateStr.append("Ag_Location::"+this.agentLocation+",");
         for (MDPStatusEdge status : edgeStatuses) {
@@ -75,7 +81,7 @@ public class State {
         this.agentLocation = agentLocation;
         this.edgeStatuses = edgeStatusVector;
         this.stateProbability = stateProbability;
-        buildStateId();
+        setStateId();
     }
 
 
