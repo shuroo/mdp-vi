@@ -50,9 +50,9 @@ public class GraphReader {
         /// Dror's third Graph Example
         // SnapshotRunner sr = new SnapshotRunner("graphs_data/dror_data/third_graph.json");
 
-        for(State st : mdpWithUtility.getStates().values()){
-            System.out.println("---State generated:"+st);
-        }
+//        for(State st : mdpWithUtility.getStates().values()){
+//            System.out.println("---State generated:"+st);
+//        }
 
     }
 

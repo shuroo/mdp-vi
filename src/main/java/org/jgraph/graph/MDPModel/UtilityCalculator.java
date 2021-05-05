@@ -42,16 +42,11 @@ public class UtilityCalculator {
                     continue;
                 } else {
 
-                    // todo: what if the action exists but the status is : Closed?
-//                    if(!currentMDP.actionExists(currentState, other)){
-//
-//                    }
-
                     Action action = currentMDP.getActionByStates(currentState, other);
                     Double stateUtility;
-                    // init minimal utility: if in destination, set zero.
+                    // init minimal utility: if in destination, set the current reward..
                     if(currentState.getAgentLocation().isFinal()){
-                        stateUtility = 0.0;
+                        stateUtility = action.getReward();
                     }
                     else {
 
@@ -81,19 +76,28 @@ public class UtilityCalculator {
 
             }
 
-            // todo: sort and return minimalActionUtility.
 
-            // LinkedHashMap preserve the ordering of elements in which they are inserted
-            LinkedHashMap<Action, Double> sortedActionsAsc = new LinkedHashMap<>();
+            // todo: put in method
+            // find minimal utility
 
-            actionUtilities.entrySet()
-                    .stream()
-                    .sorted(Map.Entry.comparingByValue())
-                    .forEachOrdered(x -> sortedActionsAsc.put(x.getKey(), x.getValue()));
+            Action minimalAction = null;
+            Double minimalUtility= null;
 
-            //System.out.println("Sorted Map   : " + sortedActionsAsc);
-            Action minimalAction = (Action) sortedActionsAsc.keySet().toArray()[0];
-            Double minimalUtility = (Double) sortedActionsAsc.values().toArray()[0];
+            for(Action action: actionUtilities.keySet()) {
+                if (currentState.getAgentLocation().getId() == action.getSrc().getId()) {
+
+                    Double actionUtility = actionUtilities.get(action);
+                    if(minimalAction == null || minimalUtility > actionUtility){
+                        minimalAction = action;
+                        minimalUtility = actionUtility;
+                    }
+
+                }
+            }
+
+
+            System.out.println("----current state:"+currentState+"-----");
+            System.out.println("----Minimal action:"+minimalAction+"-----"+minimalUtility);
 
             Double stopCondition = epsilon * (1 - discountFactor) / discountFactor;
 
