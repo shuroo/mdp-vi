@@ -67,7 +67,7 @@ public class UtilityCalculator {
                         }
                          utilityOther = other.getUtility();
                         // U(s)i+1 <- max(MDPModel.Action)sigma(P(s/s',a)(R(s,s',a)+U(s'))
-                        stateUtility = joinedprob * (rewardCurrentOther + utilityOther);
+                        stateUtility = joinedprob *  (rewardCurrentOther +  utilityOther);
 
                     }
 
@@ -123,7 +123,10 @@ public class UtilityCalculator {
 
             Double previousUtility = currentState.getUtility();
             currentState.setPreviousUtility(previousUtility);
-            currentState.setUtility(minimalUtility);
+
+            // Ui+1<-R(S)+discount*Min(P(s|s') * U(s'))
+            Double minimalUtilityWithReward = minimalAction.getReward()+ discountFactor *minimalUtility;
+            currentState.setUtility(minimalUtilityWithReward);
             currentState.setBestAction(minimalAction);
 
         }
