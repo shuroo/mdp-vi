@@ -1,8 +1,19 @@
 package org.jgraph.graph.MDPModel;
 
 public class MDPStatusEdge {
-    MDPEdge edge;
-    BlockingStatus status;
+
+    private MDPEdge edge;
+    private BlockingStatus status;
+
+
+    public MDPEdge getEdge() {
+        return edge;
+    }
+
+    public BlockingStatus getStatus() {
+        return status;
+    }
+
 
     public MDPStatusEdge(MDPEdge edge, BlockingStatus status){
         this.edge = edge;
@@ -11,6 +22,6 @@ public class MDPStatusEdge {
 
     @Override
     public String toString(){
-        return  ","+edge.toString()+"::"+status.toString();
+        return  "|"+edge.toString()+"::"+status.toString()+"|";
     }
 }

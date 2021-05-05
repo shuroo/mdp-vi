@@ -7,7 +7,7 @@ public class Edge extends DefaultEdge {
     }
 
     private Double reward = 1.0;
-    private double blockingProb = 0;
+    private double blockingProbability = 0;
     private Boolean isBlocked = false;
 
     public Vertex getSource() {
@@ -40,7 +40,7 @@ public class Edge extends DefaultEdge {
     public Edge(Vertex source, Vertex dest, Double prob, Double reward){
         this.source = source;
         this.target = dest;
-        this.blockingProb = prob;
+        this.blockingProbability = prob;
         this.reward = reward;
     }
 
@@ -57,17 +57,17 @@ public class Edge extends DefaultEdge {
 //    public void setIsBlocked(Boolean isBlocked){ this.isBlocked = isBlocked;}
 
     public double getBlockingProbability() {
-        return blockingProb;
+        return blockingProbability;
     }
 
-    public void setBlockingProb(Double blockingProbability) {
-        this.blockingProb = blockingProbability;
+    public void setBlockingProbability(Double blockingProbability) {
+        this.blockingProbability = blockingProbability;
     }
 
     public void setReward(Double reward){this.reward = reward;}
 
     public void setBlockingAndReward(Double blockingProbability , Double reward){
-        setBlockingProb(blockingProbability);
+        setBlockingProbability(blockingProbability);
         setReward(reward);
     }
 

@@ -28,18 +28,18 @@ public class Graph<V, E> {
 
     private Vertex tail;
 
-    public HashMap<java.lang.String, Vertex> getVertices() {
+    public HashMap<String, Vertex> getVertices() {
         return vertices;
     }
 
 
-    public HashMap<java.lang.String, Edge> getEdges() {
+    public HashMap<String, Edge> getEdges() {
         return edges;
     }
 
-    private HashMap<java.lang.String, Vertex> vertices = new HashMap<java.lang.String, Vertex>();
+    private HashMap<String, Vertex> vertices = new HashMap<java.lang.String, Vertex>();
 
-    private HashMap<java.lang.String, Edge> edges = new HashMap<java.lang.String, Edge>();
+    private HashMap<String, Edge> edges = new HashMap<String, Edge>();
 
     // The REAL constructor
     public Graph(java.lang.String jsonFileName) {
