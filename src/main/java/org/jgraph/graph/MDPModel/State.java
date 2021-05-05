@@ -55,7 +55,6 @@ public class State {
         for (MDPStatusEdge status : edgeStatuses) {
             uniqueStateStr.append(status.toString()+",");
         }
-        //UUID uuid = UUID.fromString(uniqueStateStr.toString());
         stateId = Constants.statePrefix + uniqueStateStr.toString();
     }
 
@@ -82,6 +81,13 @@ public class State {
         this.edgeStatuses = edgeStatusVector;
         this.stateProbability = stateProbability;
         setStateId();
+    }
+
+    // print states properly
+    @Override
+    public String toString(){
+
+        return "|AgentLocation:"+this.getAgentLocation()+"|BestAction:"+this.bestAction+"|BestUtility:"+this.minimalUtility+"|StateProbability:"+this.getStateProbability()+"|";
     }
 
 

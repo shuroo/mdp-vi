@@ -1,11 +1,11 @@
-package GraphToMDP;
+package logic.GraphToMDP;
 
+import logic.CollectionUtils;
 import org.jgraph.graph.MDPModel.*;
 import org.jgrapht.graph.Edge;
 import org.jgrapht.graph.Graph;
 import org.jgrapht.graph.Vertex;
 
-import java.text.NumberFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,11 +17,23 @@ public class MDPCreator {
         graph = g;
     }
 
-    protected Set<State> generateStatesFromStatus( List<MDPStatusEdge> statusList){
+    protected Map<String,State> generateStatesMapFromStatuses(List<LinkedList<MDPStatusEdge>> statusCombinations){
+        List<Set<State>> allStatesByLocations =
+                statusCombinations.stream().map(statusList -> generateStatesFromStatus(statusList)).collect(Collectors.toList());
+        // Flatten list:
+
+        CollectionUtils<State> cu = new CollectionUtils<State>();
+        List<State> allStates = cu.flattenList(allStatesByLocations);
+        Map<String,State> allStatesMap = cu.listToMap(allStates);
+
+        return allStatesMap;
+    }
+
+    private Set<State> generateStatesFromStatus( List<MDPStatusEdge> statusList){
 
         Double blockingProb = calcStateBlockingProbability(statusList);
-        Set<State> resultingStates = (Set<State>)graph.getVertices().keySet().stream().map(vert->{
-                MDPVertex mdpVert = new MDPVertex((String)vert);
+        Set<State> resultingStates = (Set<State>)graph.getVertices().values().stream().map(vert->{
+                MDPVertex mdpVert = new MDPVertex((Vertex) vert);
                 Vector<MDPStatusEdge> statusVector = new Vector<MDPStatusEdge>();
                 statusVector.addAll(statusList);
                 return new State(mdpVert,statusVector,blockingProb);
@@ -45,7 +57,7 @@ public class MDPCreator {
         // Round:
         stateBlockingProbability = (double)Math.round(stateBlockingProbability * 100 ) / 100;
 
-        System.out.println("BlockingProb for list:"+statusList.toString()+" should be:"+stateBlockingProbability);
+        //System.out.println("BlockingProb for list:"+statusList.toString()+" should be:"+stateBlockingProbability);
         return stateBlockingProbability;
     }
 
@@ -81,7 +93,7 @@ public class MDPCreator {
                     edgeStatusesToCombine.add(edgeSingleStatusList);
                 }
 
-                System.out.println("Initial edge statuses:"+edgeStatuses.size()+",,edgeStatusesToCombine:"+edgeStatusesToCombine.size());
+                //System.out.println("Initial edge statuses:"+edgeStatuses.size()+",,edgeStatusesToCombine:"+edgeStatusesToCombine.size());
 
             }
             else{

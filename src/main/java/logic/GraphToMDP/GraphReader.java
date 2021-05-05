@@ -1,9 +1,6 @@
-package GraphToMDP;
+package logic.GraphToMDP;
 
-import org.jgraph.graph.MDPModel.Action;
-import org.jgraph.graph.MDPModel.MDP;
-import org.jgraph.graph.MDPModel.MDPStatusEdge;
-import org.jgraph.graph.MDPModel.State;
+import org.jgraph.graph.MDPModel.*;
 import org.jgrapht.graph.Edge;
 import org.jgrapht.graph.Graph;
 
@@ -14,7 +11,6 @@ public class GraphReader {
 
 
     public static MDP GraphToMDP(Graph g) {
-        HashMap<String, State> states = new HashMap<String, State>();
 
         MDPCreator mdpc = new MDPCreator(g);
 
@@ -22,18 +18,11 @@ public class GraphReader {
         List<LinkedList<MDPStatusEdge>> statusCombinations =
                 mdpc.generateStatusesByEdges((List<Edge>) g.getEdges().values().stream().collect(Collectors.toList()));
 
-        List<Set<State>> allStatesNested = statusCombinations.stream().map(statusList -> mdpc.generateStatesFromStatus(statusList)).collect(Collectors.toList());
-        // Append agent locations...
-        List<State> allStates = new ArrayList<State>();
-        allStatesNested.forEach(allStates::addAll);
+        Map<String,State>  allStates = mdpc.generateStatesMapFromStatuses(statusCombinations);
 
-        for (State st : allStates) {
-            System.out.println(st.getStateId() + "|" + st.getStateProbability());
-            //System.out.println(s.size());
-        }
-        System.out.println("States::" + statusCombinations.size() + "::" + allStates.size());
+        //System.out.println("States before setting location::" + statusCombinations.size() + ":: And after:" + allStates.size());
         // todo: convert list to hashmap
-        return new MDP(actions, states);
+        return new MDP(actions, (HashMap<String,State>)allStates);
     }
 
 
@@ -53,14 +42,18 @@ public class GraphReader {
        // Graph gr = new Graph("graphs_data/very_basic_mdp_example_graphs/very_simple_example_18_states.json");
         // "default_graph_input.json"
         MDP mdp = GraphReader.GraphToMDP(gr);
+        UtilityCalculator uc = new UtilityCalculator(0.1,0.1);
+        MDP mdpWithUtility = uc.setOptimalPolicy(mdp);
         /// Dror's second Graph Example
         // SnapshotRunner sr = new SnapshotRunner("graphs_data/dror_data/second_graph.json");
 
         /// Dror's third Graph Example
         // SnapshotRunner sr = new SnapshotRunner("graphs_data/dror_data/third_graph.json");
 
+        for(State st : mdpWithUtility.getStates().values()){
+            System.out.println("---State generated:"+st);
+        }
 
-        System.out.println("---Today!!---");
     }
 
 

@@ -9,17 +9,23 @@ public class UtilityCalculator {
 
 
     private Double maxLambda = 10000000000.0;
-    private Double epsilon = 0.1;
+    Integer iterationCounter = 0;
 
+    private Double epsilon = 0.1;
+    // 0 to 1...
+    private Double discountFactor = 0.1;
+
+
+    public UtilityCalculator(Double epsilon, Double discountFactor){
+        this.discountFactor = discountFactor;
+        this.epsilon = epsilon;
+    }
     public void setDiscountFactor(Double discountFactor) {
         this.discountFactor = discountFactor;
     }
 
-    // 0 to 1...
-    Double discountFactor = 0.1;
-    Integer iterationCounter = 0;
 
-    public MDP findOptimalPolicy(MDP currentMDP) {
+    public MDP setOptimalPolicy(MDP currentMDP) {
 
         // For each state:
 
@@ -35,22 +41,40 @@ public class UtilityCalculator {
                 if (other.getStateId() == stateId || (!currentMDP.actionExists(currentState, other))) {
                     continue;
                 } else {
+
+                    // todo: what if the action exists but the status is : Closed?
+//                    if(!currentMDP.actionExists(currentState, other)){
+//
+//                    }
+
                     Action action = currentMDP.getActionByStates(currentState, other);
-                    Double rewardCurrentOther = action.getReward();
-                    Double utilityOther = other.getUtility();
+
                     Double joinedprob = 0.0;
-                    try {
+                    Double utilityOther;
+                    Double rewardCurrentOther = action.getReward();
+                    if(other.getStateProbability() == 0.0){
+                        joinedprob = 0.0;
+                    }
+                    else {
+
                         joinedprob = currentState.stateProbability / other.stateProbability;
-                    } catch (Exception e) {
-                        System.out.println("Failed to fetch probability for States:" + currentState.stateProbability + "," + other.stateProbability);
+                    }
+                    // init minimal utility: if in destination, set zero.
+                    if(action.getDst().isFinal()){
+                         utilityOther = 0.0;
+                    }
+                    else {
+
+                         utilityOther = other.getUtility();
+
                     }
                     // U(s)i+1 <- max(MDPModel.Action)sigma(P(s/s',a)(R(s,s',a)+U(s'))
-                    Double statesUtility = joinedprob * (rewardCurrentOther + utilityOther);
+                    Double stateUtility = joinedprob * (rewardCurrentOther + utilityOther);
                     if (!actionUtilities.containsKey(action)) {
                         actionUtilities.put(action, 0.0);
                     }
-                    Double prevActionUtility = actionUtilities.get(action);
-                    actionUtilities.put(action, prevActionUtility + statesUtility);
+                    //Double prevActionUtility = actionUtilities.get(action);
+                    actionUtilities.put(action, stateUtility);
 
                 }
 

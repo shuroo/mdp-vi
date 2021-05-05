@@ -1,6 +1,7 @@
 package org.jgraph.graph.MDPModel;
 
 import org.jgrapht.graph.Edge;
+import org.jgrapht.graph.Vertex;
 
 public class MDPEdge{
 
@@ -25,10 +26,10 @@ public class MDPEdge{
     }
 
     public static MDPEdge mdpeFromEdge(Edge edge){
-        return new MDPEdge(new MDPVertex(edge.getSource().toString()),
-                new MDPVertex(edge.getTarget().toString()),
-                edge.getReward(),
+        return new MDPEdge(new MDPVertex(edge.getSource()),
+                new MDPVertex((Vertex)edge.getTarget()),
                 edge.getBlockingProbability(),
+                edge.getReward(),
                 null // status should be set on runtime!
                 );
     }
