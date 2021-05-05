@@ -48,28 +48,29 @@ public class UtilityCalculator {
 //                    }
 
                     Action action = currentMDP.getActionByStates(currentState, other);
-
-                    Double joinedprob = 0.0;
-                    Double utilityOther;
-                    Double rewardCurrentOther = action.getReward();
-                    if(other.getStateProbability() == 0.0){
-                        joinedprob = 0.0;
-                    }
-                    else {
-
-                        joinedprob = currentState.stateProbability / other.stateProbability;
-                    }
+                    Double stateUtility;
                     // init minimal utility: if in destination, set zero.
-                    if(action.getDst().isFinal()){
-                         utilityOther = 0.0;
+                    if(currentState.getAgentLocation().isFinal()){
+                        stateUtility = 0.0;
                     }
                     else {
 
+                        Double joinedprob = 0.0;
+                        Double utilityOther;
+                        Double rewardCurrentOther = action.getReward();
+                        if(other.getStateProbability() == 0.0){
+                            joinedprob = 0.0;
+                        }
+                        else {
+
+                            joinedprob = currentState.stateProbability / other.stateProbability;
+                        }
                          utilityOther = other.getUtility();
+                        // U(s)i+1 <- max(MDPModel.Action)sigma(P(s/s',a)(R(s,s',a)+U(s'))
+                        stateUtility = joinedprob * (rewardCurrentOther + utilityOther);
 
                     }
-                    // U(s)i+1 <- max(MDPModel.Action)sigma(P(s/s',a)(R(s,s',a)+U(s'))
-                    Double stateUtility = joinedprob * (rewardCurrentOther + utilityOther);
+
                     if (!actionUtilities.containsKey(action)) {
                         actionUtilities.put(action, 0.0);
                     }
