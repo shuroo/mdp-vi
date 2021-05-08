@@ -75,11 +75,16 @@ public class Action implements Comparable<Action> {
         return null;
     }
 
+    /**
+     * Sort by utility DESC.
+     * @param action
+     * @return
+     */
     @Override
     public int compareTo(Action action) {
         if (getActionUtility() == null || action.getActionUtility() == null) {
             return 0;
         }
-        return getActionUtility().compareTo(action.getActionUtility());
+        return action.getActionUtility().compareTo(getActionUtility());
     }
 }

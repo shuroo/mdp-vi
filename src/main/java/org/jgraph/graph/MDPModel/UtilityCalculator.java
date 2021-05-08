@@ -26,11 +26,11 @@ public class UtilityCalculator {
 
 
 
-    public MDP setOptimalPolicy(MDP currentMDP) {
-
-        // For each state:
-
-        HashMap<Action, Double> actionUtilities = new HashMap();
+//    public MDP setOptimalPolicy(MDP currentMDP) {
+//
+//        // For each state:
+//
+//        HashMap<Action, Double> actionUtilities = new HashMap();
 //        for (State currentState : currentMDP.getStates().values()) {
 //
 //            iterationCounter++;
@@ -128,9 +128,37 @@ public class UtilityCalculator {
 //        System.out.println(currentMDP.states.values().stream().map(state->state.getBestAction()).collect(Collectors.toList()));
 //        return currentMDP;
 
-        setUtilitiesForStatesIteration(currentMDP.actionsMap.values().stream().collect(Collectors.toList()),
-                currentMDP.states.values().stream().collect(Collectors.toSet()));
+    public MDP setOptimalPolicy(MDP currentMDP) {
+
+        Double stopCondition = epsilon * (1 - discountFactor) / discountFactor;
+        // For each state:
+        while (maxLambda >= stopCondition) {
+
+            setUtilitiesForStatesIteration(currentMDP.actionsMap.values().stream().collect(Collectors.toList()),
+                    currentMDP.states.values().stream().collect(Collectors.toSet()));
+
+
+            // Check diff to stop...
+            for(State state :currentMDP.states.values().stream().collect(Collectors.toSet())){
+
+                Double minimalUtility = state.getUtility();
+                Double prevUtility = state.getPreviousUtility();
+                System.out.println("Utility found for state: and bestAction: is: ");
+                Double diffUtility = Math.abs(minimalUtility - prevUtility);
+                // max diff per ALL states ... //
+                if (maxLambda > diffUtility) {
+                    maxLambda = diffUtility;
+                }
+                if (maxLambda < stopCondition) {
+                    System.out.println("Stopping at lambda:"+maxLambda);
+                    break;
+                }
+
+            }
+
+        }
         return currentMDP;
+
     }
 
 //    private HashMap<Action,Double> findMinimalAction(HashMap<Action,Double> actionUtilities,State currentState){
@@ -229,17 +257,31 @@ public class UtilityCalculator {
      */
     private Set<State> setUtilitiesForStatesIteration(List<Action> bestActions, Set<State> allStates){
         List<Action> updatedActionsUtility = setActionsUtility(bestActions,allStates);
-        for(Action action : updatedActionsUtility){
-            System.out.println("--Actions after set utility:"+action);
-        }
-
-        for(Action action : updatedActionsUtility.stream() .filter(action -> action.getSrc().getId() == "V1").collect(Collectors.toList())){
-            System.out.println("--Actions FILTERED set utility:"+action);
-        }
-//        for(State state : allStates){
 //
-//        }
+//        updatedActionsUtility.stream().filter(action -> action.getSrc().getId().equals("v2")).collect(Collectors.toList()).forEach(action->
+//            System.out.println("++++Actions FILTERED set utility:"+action));
+        for(State state : allStates){
+            setUtilitySingleState(state, updatedActionsUtility);
+        }
 
         return allStates;
+    }
+
+    private void setUtilitySingleState(State state, List<Action> allActions){
+
+        Set<Action> stateActionsFiltered =
+                allActions.stream().filter(action -> action.getSrc().getId().equals(state.getAgentLocation().getId())).collect(Collectors.toSet());
+        Action minimalUtilityAction = null;
+        Double minimalUtility = 0.0;
+
+       if(!stateActionsFiltered.isEmpty()){
+           minimalUtilityAction = (Action) stateActionsFiltered.toArray()[stateActionsFiltered.size()-1];
+           minimalUtility = minimalUtilityAction.actionUtility;
+       }
+
+        System.out.println("++++Minimal utility action to set for state:"+state.getStateId()+" is :"+minimalUtilityAction);
+        state.setPreviousUtility(state.getUtility());
+        state.setUtility(minimalUtility);
+        state.setBestAction(minimalUtilityAction);
     }
 }
