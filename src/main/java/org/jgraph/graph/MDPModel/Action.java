@@ -1,6 +1,6 @@
 package org.jgraph.graph.MDPModel;
 
-public class Action {
+public class Action implements Comparable<Action> {
 
     public Double getReward() {
         return reward;
@@ -13,6 +13,18 @@ public class Action {
 
     public MDPEdge getActionEdge() {
         return actionEdge;
+    }
+
+    // utility per iteration to summerise on action during utility calculation
+
+    public Double actionUtility = 0.0;
+
+    public Double getActionUtility() {
+        return actionUtility;
+    }
+
+    public void setActionUtility(Double actionUtility) {
+        this.actionUtility = actionUtility;
     }
 
     private MDPEdge actionEdge;  /// The 1:1 mdp related edge ///
@@ -61,5 +73,13 @@ public class Action {
             return this.dst;
         }
         return null;
+    }
+
+    @Override
+    public int compareTo(Action action) {
+        if (getActionUtility() == null || action.getActionUtility() == null) {
+            return 0;
+        }
+        return getActionUtility().compareTo(action.getActionUtility());
     }
 }

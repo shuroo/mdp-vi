@@ -32,8 +32,8 @@ public class State {
         this.previousUtility = previousUtility;
     }
 
-    private Double previousUtility = 10000000000.0;
-    private Double minimalUtility = 10000000000.0;
+    private Double previousUtility =0.0;
+    private Double minimalUtility = 0.0;
 
     public Double getStateProbability() {
         return stateProbability;
