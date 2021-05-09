@@ -90,8 +90,8 @@ public class State  {
     @Override
     public String toString(){
 
-        return "|AgentLocation:"+this.getAgentLocation()+"|BestAction:"+this.bestAction+"|BestUtility:"+this.minimalUtility+"|StateProbability:"+this
-        .getStateProbability()+"|";
+        return "|AgentLocation:"+this.getAgentLocation()+"|BestAction:"+this.bestAction+"|StateUtility:"+this.minimalUtility+"|StateProbability:"+this
+        .getStateProbability()+"|Statuses:"+getStateId();
     }
 
 }

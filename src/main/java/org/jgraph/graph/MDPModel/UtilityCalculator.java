@@ -63,9 +63,9 @@ public class UtilityCalculator {
 
             }
 
-//            currentMDP.getStates().values().stream().forEach(state -> {
-//                System.out.println(state.getUtility());
-//            });
+            currentMDP.getStates().values().stream().forEach(state -> {
+                System.out.println("**** Final Set for state:" + state.toString());
+            });
 
         }
 
@@ -169,12 +169,13 @@ public class UtilityCalculator {
             Integer actionIndex = stateActionsFiltered.size() - 1;
             minimalUtilityAction =findMinimalUnblockedAction(state, actionIndex,
                     stateActionsFiltered);
-            minimalUtility = minimalUtilityAction != null ? minimalUtilityAction.actionUtility : 0.0;
+
+            // U(s) <- R(a) + Utility(a)
+            minimalUtility = minimalUtilityAction != null ? (minimalUtilityAction.getReward() +  minimalUtilityAction.actionUtility) : 0.0;
         }
 
-        System.out.println("++++ Current Best action to set for state:" + state.getStateId() + " Is :" + minimalUtilityAction);
         state.setPreviousUtility(state.getUtility());
-        minimalUtility = CollectionUtils.roundTwoDigits(minimalUtility);
+        //minimalUtility = CollectionUtils.roundTwoDigits(minimalUtility);
         state.setUtility(minimalUtility);
         state.setBestAction(minimalUtilityAction);
     }
@@ -189,7 +190,7 @@ public class UtilityCalculator {
         }
         // IF found no possible valid action due to action blockings...
         if (actionIndex == 0 && statuses.get(currentAction.getActionId()).getStatus() == BlockingStatus.Closed) {
-            System.out.println("Found no valid action due to action blockings - returning null! For state:" + state.getStateId());
+            //System.out.println("Found no valid action due to action blockings - returning null! For state:" + state.getStateId());
             return null;
         }
         return currentAction;
