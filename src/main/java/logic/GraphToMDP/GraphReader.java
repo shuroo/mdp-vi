@@ -20,7 +20,8 @@ public class GraphReader {
 
         Map<String,State>  allStates = mdpc.generateStatesMapFromStatuses(statusCombinations);
 
-        //System.out.println("States before setting location::" + statusCombinations.size() + ":: And after:" + allStates.size());
+        System.out.println("Graph is translated to an MDP of "+actions.size()+" actions, "+allStates.size()+" states");
+       // System.out.println("States before setting location::" + statusCombinations.size() + ":: And after:" + allStates.size());
         // todo: convert list to hashmap
         return new MDP(actions, (HashMap<String,State>)allStates);
     }
@@ -35,24 +36,23 @@ public class GraphReader {
         // SnapshotRunner sr = new SnapshotRunner("graphs_data/default_graph_input.json");
 
         /// Dror's first Graph Example
-        Graph gr = new Graph("graphs_data/default_graph_input.json");
+      //  Graph gr = new Graph("graphs_data/default_graph_input.json");
 
        // Graph gr = new Graph("graphs_data/very_basic_mdp_example_graphs/small_graph_81_states.json");
 
        // Graph gr = new Graph("graphs_data/very_basic_mdp_example_graphs/very_simple_example_18_states.json");
+
+        //Graph gr = new Graph("graphs_data/dror_data/first_graph.json");
+
+        /// Dror's second Graph Example
+        Graph gr = new Graph("graphs_data/dror_data/second_graph.json");
+
+        /// Dror's third Graph Example
+        // Graph gr = new Graph("graphs_data/dror_data/third_graph.json");
         // "default_graph_input.json"
         MDP mdp = GraphReader.GraphToMDP(gr);
         UtilityCalculator uc = new UtilityCalculator(0.1,0.1);
         MDP mdpWithUtility = uc.setOptimalPolicy(mdp);
-        /// Dror's second Graph Example
-        // SnapshotRunner sr = new SnapshotRunner("graphs_data/dror_data/second_graph.json");
-
-        /// Dror's third Graph Example
-        // SnapshotRunner sr = new SnapshotRunner("graphs_data/dror_data/third_graph.json");
-
-//        for(State st : mdpWithUtility.getStates().values()){
-//            System.out.println("---State generated:"+st);
-//        }
 
     }
 
