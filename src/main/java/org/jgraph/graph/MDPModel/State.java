@@ -35,7 +35,7 @@ public class State  {
     }
 
     private Double previousUtility = 1000.0;
-    private Double minimalUtility = 100.0;
+    private Double minimalUtility = 0.0;
 
     public Double getStateProbability() {
         return stateProbability;

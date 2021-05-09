@@ -13,30 +13,30 @@ public class MDPCreator {
 
     Graph graph;
 
-    public MDPCreator(Graph g){
+    public MDPCreator(Graph g) {
         graph = g;
     }
 
-    protected Map<String,State> generateStatesMapFromStatuses(List<LinkedList<MDPStatusEdge>> statusCombinations){
+    protected Map<String, State> generateStatesMapFromStatuses(List<LinkedList<MDPStatusEdge>> statusCombinations) {
         List<Set<State>> allStatesByLocations =
                 statusCombinations.stream().map(statusList -> generateStatesFromStatus(statusList)).collect(Collectors.toList());
         // Flatten list:
 
         CollectionUtils<State> cu = new CollectionUtils<State>();
         List<State> allStates = cu.flattenList(allStatesByLocations);
-        Map<String,State> allStatesMap = cu.stateToMap(allStates);
+        Map<String, State> allStatesMap = cu.stateToMap(allStates);
 
         return allStatesMap;
     }
 
-    private Set<State> generateStatesFromStatus( List<MDPStatusEdge> statusList){
+    private Set<State> generateStatesFromStatus(List<MDPStatusEdge> statusList) {
 
         Double blockingProb = calcStateBlockingProbability(statusList);
-        Set<State> resultingStates = (Set<State>)graph.getVertices().values().stream().map(vert->{
-                MDPVertex mdpVert = new MDPVertex((Vertex) vert);
-                Vector<MDPStatusEdge> statusVector = new Vector<MDPStatusEdge>();
-                statusVector.addAll(statusList);
-                return new State(mdpVert,statusVector,blockingProb);
+        Set<State> resultingStates = (Set<State>) graph.getVertices().values().stream().map(vert -> {
+            MDPVertex mdpVert = new MDPVertex((Vertex) vert);
+            Vector<MDPStatusEdge> statusVector = new Vector<MDPStatusEdge>();
+            statusVector.addAll(statusList);
+            return new State(mdpVert, statusVector, blockingProb);
         }).collect(Collectors.toSet());
         return resultingStates;
     }
@@ -55,13 +55,15 @@ public class MDPCreator {
         }
 
         // Round:
-        stateBlockingProbability = (double)Math.round(stateBlockingProbability * 100 ) / 100;
+
+        stateBlockingProbability = CollectionUtils.roundTwoDigits(stateBlockingProbability);
+
 
         //System.out.println("BlockingProb for list:"+statusList.toString()+" should be:"+stateBlockingProbability);
         return stateBlockingProbability;
     }
 
-    protected  HashMap<String, Action> edgesToActions(){
+    protected HashMap<String, Action> edgesToActions() {
 
         HashMap<String, Action> actions = new HashMap<String, Action>();
         List<Edge> edges = (List<Edge>) graph.getEdges().values().stream().collect(Collectors.toList());
@@ -74,19 +76,19 @@ public class MDPCreator {
         return actions;
     }
 
-    protected   List<LinkedList<MDPStatusEdge>> generateStatusesByEdges(List<Edge> edges) {
+    protected List<LinkedList<MDPStatusEdge>> generateStatusesByEdges(List<Edge> edges) {
 
-        List<LinkedList<MDPStatusEdge>> edgeStatusesToCombine = new LinkedList< LinkedList<MDPStatusEdge> >();
-        for(Edge edge : edges){
+        List<LinkedList<MDPStatusEdge>> edgeStatusesToCombine = new LinkedList<LinkedList<MDPStatusEdge>>();
+        for (Edge edge : edges) {
             //Edge edge = edges.remove(i);
 
 
-            if(edgeStatusesToCombine.isEmpty()){
+            if (edgeStatusesToCombine.isEmpty()) {
 
-                HashMap<String, State> edgeStatuses =  generateAllStatusesFromEdge(edge);
+                HashMap<String, State> edgeStatuses = generateAllStatusesFromEdge(edge);
 
                 // create a list of single status element (*3)
-                for(State singleStatus : edgeStatuses.values()) {
+                for (State singleStatus : edgeStatuses.values()) {
                     LinkedList<MDPStatusEdge> edgeSingleStatusList = new LinkedList<MDPStatusEdge>();
                     List<MDPStatusEdge> status = singleStatus.getEdgeStatuses(); // edge+O OR
                     // edge+C
@@ -97,13 +99,12 @@ public class MDPCreator {
 
                 //System.out.println("Initial edge statuses:"+edgeStatuses.size()+",,edgeStatusesToCombine:"+edgeStatusesToCombine.size());
 
-            }
-            else{
+            } else {
                 List<LinkedList<MDPStatusEdge>> statusestoCreate = new LinkedList<LinkedList<MDPStatusEdge>>();
-                for(LinkedList<MDPStatusEdge> oldStatus: edgeStatusesToCombine){
-                    HashMap<String,State> edgeStatuses =  generateAllStatusesFromEdge(edge);
+                for (LinkedList<MDPStatusEdge> oldStatus : edgeStatusesToCombine) {
+                    HashMap<String, State> edgeStatuses = generateAllStatusesFromEdge(edge);
 
-                    for(State singleStatus : edgeStatuses.values()) {
+                    for (State singleStatus : edgeStatuses.values()) {
                         LinkedList<MDPStatusEdge> edgeSingleStatusList = new LinkedList<MDPStatusEdge>();
                         edgeSingleStatusList.addAll(oldStatus);
                         Vector<MDPStatusEdge> status = singleStatus.getEdgeStatuses(); // edge+O OR edge+C OR
@@ -119,7 +120,7 @@ public class MDPCreator {
         return edgeStatusesToCombine;
     }
 
-    protected static HashMap<String,State> generateAllStatusesFromEdge(Edge edge){
+    protected static HashMap<String, State> generateAllStatusesFromEdge(Edge edge) {
 
         MDPEdge mdpedge = MDPEdge.mdpeFromEdge(edge);
         MDPStatusEdge es = new MDPStatusEdge(mdpedge, BlockingStatus.Closed);
@@ -141,10 +142,10 @@ public class MDPCreator {
         State st3 = new State(null, st3_v, 1.0);
 
 
-        HashMap<String,State> newStatesToConcat = new HashMap<String,State>();
-        newStatesToConcat.put(st1.getStateId(),st1);
-        newStatesToConcat.put(st2.getStateId(),st2);
-        newStatesToConcat.put(st3.getStateId(),st3);
+        HashMap<String, State> newStatesToConcat = new HashMap<String, State>();
+        newStatesToConcat.put(st1.getStateId(), st1);
+        newStatesToConcat.put(st2.getStateId(), st2);
+        newStatesToConcat.put(st3.getStateId(), st3);
 
         return newStatesToConcat;
     }

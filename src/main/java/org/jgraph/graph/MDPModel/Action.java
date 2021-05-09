@@ -1,5 +1,7 @@
 package org.jgraph.graph.MDPModel;
 
+import logic.CollectionUtils;
+
 public class Action implements Comparable<Action> {
 
     public Double getReward() {
@@ -7,8 +9,8 @@ public class Action implements Comparable<Action> {
     }
 
     @Override
-    public String toString(){
-        return "utility:"+actionUtility+", src:"+src+",dst:"+dst+",reward:"+reward;
+    public String toString() {
+        return "utility:" + getActionUtility() + ", src:" + src + ",dst:" + dst + ",reward:" + reward;
     }
 
     public MDPEdge getActionEdge() {
@@ -20,7 +22,7 @@ public class Action implements Comparable<Action> {
     public Double actionUtility = 0.0;
 
     public Double getActionUtility() {
-        return actionUtility;
+        return CollectionUtils.roundTwoDigits(actionUtility);
     }
 
     public void setActionUtility(Double actionUtility) {
@@ -35,12 +37,13 @@ public class Action implements Comparable<Action> {
         return src;
     }
 
-    private MDPVertex src; private MDPVertex dst;
+    private MDPVertex src;
+    private MDPVertex dst;
 
     private String actionId;
 
-    public static String generateActionId(MDPVertex src, MDPVertex dst){
-        return src.getId()+"_"+dst.getId();
+    public static String generateActionId(MDPVertex src, MDPVertex dst) {
+        return src.getId() + "_" + dst.getId();
     }
 
     public MDPVertex getDst() {
@@ -60,16 +63,16 @@ public class Action implements Comparable<Action> {
         return actionId;
     }
 
-    public Action(MDPEdge edge){
+    public Action(MDPEdge edge) {
         this.src = edge.src;
         this.dst = edge.dst;
         this.reward = edge.reward;
         this.actionEdge = edge;
-        actionId = generateActionId(edge.src,edge.dst);
+        actionId = generateActionId(edge.src, edge.dst);
     }
 
-    public MDPVertex move(MDPVertex src){
-        if(src == this.src){
+    public MDPVertex move(MDPVertex src) {
+        if (src == this.src) {
             return this.dst;
         }
         return null;
@@ -77,6 +80,7 @@ public class Action implements Comparable<Action> {
 
     /**
      * Sort by utility DESC.
+     *
      * @param action
      * @return
      */

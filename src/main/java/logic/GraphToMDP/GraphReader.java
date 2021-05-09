@@ -36,16 +36,16 @@ public class GraphReader {
         // SnapshotRunner sr = new SnapshotRunner("graphs_data/default_graph_input.json");
 
         /// Dror's first Graph Example
-      //  Graph gr = new Graph("graphs_data/default_graph_input.json");
+        Graph gr = new Graph("graphs_data/default_graph_input.json");
 
        // Graph gr = new Graph("graphs_data/very_basic_mdp_example_graphs/small_graph_81_states.json");
 
-       // Graph gr = new Graph("graphs_data/very_basic_mdp_example_graphs/very_simple_example_18_states.json");
+       //Graph gr = new Graph("graphs_data/very_basic_mdp_example_graphs/very_simple_example_18_states.json");
 
         //Graph gr = new Graph("graphs_data/dror_data/first_graph.json");
 
         /// Dror's second Graph Example
-        Graph gr = new Graph("graphs_data/dror_data/second_graph.json");
+        //Graph gr = new Graph("graphs_data/dror_data/second_graph.json");
 
         /// Dror's third Graph Example
         // Graph gr = new Graph("graphs_data/dror_data/third_graph.json");
