@@ -1,8 +1,11 @@
 package org.jgraph.graph.MDPModel;
 
+import logic.CollectionUtils;
+
+import java.util.Map;
 import java.util.Vector;
 
-public class State {
+public class State  {
 
 
     public String getStateId() {
@@ -32,8 +35,8 @@ public class State {
         this.previousUtility = previousUtility;
     }
 
-    private Double previousUtility =0.0;
-    private Double minimalUtility = 0.0;
+    private Double previousUtility = 1000.0;
+    private Double minimalUtility = 1000.0;
 
     public Double getStateProbability() {
         return stateProbability;
@@ -42,17 +45,17 @@ public class State {
     // The probability to occur - based on which edges are currently opened or closed in the current state and thier probsbilities.
     Double stateProbability;
 
-    public Vector<MDPStatusEdge> getEdgeStatuses() {
+    public Map<String,MDPStatusEdge> getEdgeStatuses() {
         return edgeStatuses;
     }
 
     // Vector of edgeStatuses
-    Vector<MDPStatusEdge> edgeStatuses;
+    Map<String,MDPStatusEdge> edgeStatuses;
 
     private void setStateId() {
         StringBuilder uniqueStateStr = new StringBuilder();
         uniqueStateStr.append("Ag_Location::"+this.agentLocation+",");
-        for (MDPStatusEdge status : edgeStatuses) {
+        for (MDPStatusEdge status : edgeStatuses.values()) {
             uniqueStateStr.append(status.toString()+",");
         }
         stateId = Constants.statePrefix + uniqueStateStr.toString();
@@ -78,7 +81,8 @@ public class State {
 
     public State(MDPVertex agentLocation, Vector<MDPStatusEdge> edgeStatusVector, Double stateProbability) {
         this.agentLocation = agentLocation;
-        this.edgeStatuses = edgeStatusVector;
+        CollectionUtils cu = new CollectionUtils();
+        this.edgeStatuses = cu.mdpEdgeToMap(edgeStatusVector);
         this.stateProbability = stateProbability;
         setStateId();
     }
@@ -87,8 +91,13 @@ public class State {
     @Override
     public String toString(){
 
-        return "|AgentLocation:"+this.getAgentLocation()+"|BestAction:"+this.bestAction+"|BestUtility:"+this.minimalUtility+"|StateProbability:"+this.getStateProbability()+"|";
+        return "|AgentLocation:"+this.getAgentLocation()+"|BestAction:"+this.bestAction+"|BestUtility:"+this.minimalUtility+"|StateProbability:"+this
+        .getStateProbability()+"|";
     }
 
 
+//    @Override
+//    public String keyMap() {
+//        return getStateId();
+//    }
 }

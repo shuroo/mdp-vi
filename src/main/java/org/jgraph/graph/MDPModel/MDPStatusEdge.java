@@ -10,6 +10,10 @@ public class MDPStatusEdge {
         return edge;
     }
 
+    public String getId() {
+        return edge.getId();
+    }
+
     public BlockingStatus getStatus() {
         return status;
     }
@@ -24,4 +28,8 @@ public class MDPStatusEdge {
     public String toString(){
         return  "|"+edge.toString()+"::"+status.toString()+"|";
     }
+
+//    public String keyMap(){
+//        return edge.getId();//
+//    }
 }

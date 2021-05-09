@@ -24,7 +24,7 @@ public class MDPCreator {
 
         CollectionUtils<State> cu = new CollectionUtils<State>();
         List<State> allStates = cu.flattenList(allStatesByLocations);
-        Map<String,State> allStatesMap = cu.listToMap(allStates);
+        Map<String,State> allStatesMap = cu.stateToMap(allStates);
 
         return allStatesMap;
     }
@@ -88,7 +88,9 @@ public class MDPCreator {
                 // create a list of single status element (*3)
                 for(State singleStatus : edgeStatuses.values()) {
                     LinkedList<MDPStatusEdge> edgeSingleStatusList = new LinkedList<MDPStatusEdge>();
-                    Vector<MDPStatusEdge> status = singleStatus.getEdgeStatuses(); // edge+O OR edge+C OR edge+U
+                    List<MDPStatusEdge> status = singleStatus.getEdgeStatuses().values().stream().collect(Collectors.toList()); // edge+O OR
+                    // edge+C
+                    // OR edge+U
                     edgeSingleStatusList.addAll(status);// make sure this adds only one!! status elemen
                     edgeStatusesToCombine.add(edgeSingleStatusList);
                 }
@@ -104,7 +106,8 @@ public class MDPCreator {
                     for(State singleStatus : edgeStatuses.values()) {
                         LinkedList<MDPStatusEdge> edgeSingleStatusList = new LinkedList<MDPStatusEdge>();
                         edgeSingleStatusList.addAll(oldStatus);
-                        Vector<MDPStatusEdge> status = singleStatus.getEdgeStatuses(); // edge+O OR edge+C OR edge+U
+                        List<MDPStatusEdge> status = singleStatus.getEdgeStatuses().values().stream().collect(Collectors.toList()); // edge+O OR edge+C OR
+                        // edge+U
                         edgeSingleStatusList.addAll(status);// make sure this adds only one!! status elemen
                         statusestoCreate.add(edgeSingleStatusList);
                     }

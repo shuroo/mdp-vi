@@ -130,10 +130,12 @@ public class UtilityCalculator {
 
     public MDP setOptimalPolicy(MDP currentMDP) {
 
+        Integer iterationCounter = 0;
         Double stopCondition = epsilon * (1 - discountFactor) / discountFactor;
         // For each state:
         while (maxLambda >= stopCondition) {
 
+            iterationCounter++;
             setUtilitiesForStatesIteration(currentMDP.actionsMap.values().stream().collect(Collectors.toList()),
                     currentMDP.states.values().stream().collect(Collectors.toSet()));
 
@@ -143,14 +145,14 @@ public class UtilityCalculator {
 
                 Double minimalUtility = state.getUtility();
                 Double prevUtility = state.getPreviousUtility();
-                System.out.println("Utility found for state: and bestAction: is: ");
+                System.out.println("Utility found for state:"+state.getStateId()+" and bestAction:"+state.getBestAction()+" is: "+state.getUtility());
                 Double diffUtility = Math.abs(minimalUtility - prevUtility);
                 // max diff per ALL states ... //
                 if (maxLambda > diffUtility) {
                     maxLambda = diffUtility;
                 }
                 if (maxLambda < stopCondition) {
-                    System.out.println("Stopping at lambda:"+maxLambda);
+                    System.out.println("Stopping at lambda:"+maxLambda+",With iteration counter:"+iterationCounter);
                     break;
                 }
 
@@ -257,9 +259,7 @@ public class UtilityCalculator {
      */
     private Set<State> setUtilitiesForStatesIteration(List<Action> bestActions, Set<State> allStates){
         List<Action> updatedActionsUtility = setActionsUtility(bestActions,allStates);
-//
-//        updatedActionsUtility.stream().filter(action -> action.getSrc().getId().equals("v2")).collect(Collectors.toList()).forEach(action->
-//            System.out.println("++++Actions FILTERED set utility:"+action));
+
         for(State state : allStates){
             setUtilitySingleState(state, updatedActionsUtility);
         }
@@ -275,13 +275,25 @@ public class UtilityCalculator {
         Double minimalUtility = 0.0;
 
        if(!stateActionsFiltered.isEmpty()){
-           minimalUtilityAction = (Action) stateActionsFiltered.toArray()[stateActionsFiltered.size()-1];
+           Integer actionIndex = stateActionsFiltered.size()-1;
+           minimalUtilityAction =  (Action)stateActionsFiltered.toArray()[actionIndex]; //findMinimalUnblockedAction( state,  actionIndex ,
+                  // stateActionsFiltered);
            minimalUtility = minimalUtilityAction.actionUtility;
        }
 
-        System.out.println("++++Minimal utility action to set for state:"+state.getStateId()+" is :"+minimalUtilityAction);
+        System.out.println("++++Current Best action to set for state:"+state.getStateId()+" is :"+minimalUtilityAction);
         state.setPreviousUtility(state.getUtility());
         state.setUtility(minimalUtility);
         state.setBestAction(minimalUtilityAction);
+    }
+
+    private Action findMinimalUnblockedAction(State state, Integer actionIndex ,Set<Action> stateActionsFiltered){
+        Map<String,MDPStatusEdge> stateStatusedEdges = state.edgeStatuses;
+        Action currentAction = (Action)stateActionsFiltered.toArray()[actionIndex];
+        while(actionIndex > -1 && stateStatusedEdges.get(currentAction.getActionId()).getStatus() == BlockingStatus.Closed){
+            actionIndex--;
+            currentAction = (Action)stateActionsFiltered.toArray()[actionIndex];
+        }
+        return currentAction;
     }
 }
