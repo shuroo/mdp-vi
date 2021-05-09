@@ -29,7 +29,4 @@ public class MDPStatusEdge {
         return  "|"+edge.toString()+"::"+status.toString()+"|";
     }
 
-//    public String keyMap(){
-//        return edge.getId();//
-//    }
 }

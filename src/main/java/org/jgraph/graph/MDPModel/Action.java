@@ -8,7 +8,7 @@ public class Action implements Comparable<Action> {
 
     @Override
     public String toString(){
-        return "src:"+src+",dst:"+dst+",reward:"+reward;
+        return "utility:"+actionUtility+", src:"+src+",dst:"+dst+",reward:"+reward;
     }
 
     public MDPEdge getActionEdge() {

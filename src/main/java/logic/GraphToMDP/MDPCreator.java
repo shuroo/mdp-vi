@@ -88,7 +88,7 @@ public class MDPCreator {
                 // create a list of single status element (*3)
                 for(State singleStatus : edgeStatuses.values()) {
                     LinkedList<MDPStatusEdge> edgeSingleStatusList = new LinkedList<MDPStatusEdge>();
-                    List<MDPStatusEdge> status = singleStatus.getEdgeStatuses().values().stream().collect(Collectors.toList()); // edge+O OR
+                    List<MDPStatusEdge> status = singleStatus.getEdgeStatuses(); // edge+O OR
                     // edge+C
                     // OR edge+U
                     edgeSingleStatusList.addAll(status);// make sure this adds only one!! status elemen
@@ -106,7 +106,7 @@ public class MDPCreator {
                     for(State singleStatus : edgeStatuses.values()) {
                         LinkedList<MDPStatusEdge> edgeSingleStatusList = new LinkedList<MDPStatusEdge>();
                         edgeSingleStatusList.addAll(oldStatus);
-                        List<MDPStatusEdge> status = singleStatus.getEdgeStatuses().values().stream().collect(Collectors.toList()); // edge+O OR edge+C OR
+                        Vector<MDPStatusEdge> status = singleStatus.getEdgeStatuses(); // edge+O OR edge+C OR
                         // edge+U
                         edgeSingleStatusList.addAll(status);// make sure this adds only one!! status elemen
                         statusestoCreate.add(edgeSingleStatusList);

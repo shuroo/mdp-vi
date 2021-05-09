@@ -9,7 +9,6 @@ public class UtilityCalculator {
 
 
     private Double maxLambda = 10000000000.0;
-    Integer iterationCounter = 0;
 
     private Double epsilon = 0.1;
     // 0 to 1...
@@ -23,110 +22,6 @@ public class UtilityCalculator {
     public void setDiscountFactor(Double discountFactor) {
         this.discountFactor = discountFactor;
     }
-
-
-
-//    public MDP setOptimalPolicy(MDP currentMDP) {
-//
-//        // For each state:
-//
-//        HashMap<Action, Double> actionUtilities = new HashMap();
-//        for (State currentState : currentMDP.getStates().values()) {
-//
-//            iterationCounter++;
-//
-//            String stateId = currentState.getStateId();
-//
-//
-//            for (State other : currentMDP.getStates().values()) {
-//                if (other.getStateId() == stateId || (!currentMDP.actionExists(currentState, other))) {
-//                    continue;
-//                } else {
-//
-//                    Action action = currentMDP.getActionByStates(currentState, other);
-//                    Double stateUtility;
-//                    // init minimal utility: if in destination, set the current reward..
-//                    if(currentState.getAgentLocation().isFinal()){
-//                        stateUtility = action.getReward();
-//                    }
-//                    else {
-//
-//                        Double joinedprob = 0.0;
-//                        Double utilityOther;
-//                        Double rewardCurrentOther = action.getReward();
-//                        if(other.getStateProbability() == 0.0){
-//                            joinedprob = 0.0;
-//                        }
-//                        else {
-//
-//                            joinedprob = currentState.stateProbability / other.stateProbability;
-//                        }
-//                         utilityOther = other.getUtility();
-//                        // U(s)i+1 <- max(MDPModel.Action)sigma(P(s/s',a)(R(s,s',a)+U(s'))
-//                        stateUtility = joinedprob *  (rewardCurrentOther +  utilityOther);
-//
-//                    }
-//
-//                    if (!actionUtilities.containsKey(action)) {
-//                        actionUtilities.put(action, 0.0);
-//                    }
-//                    //Double prevActionUtility = actionUtilities.get(action);
-//                    actionUtilities.put(action, stateUtility);
-//
-//                }
-//
-//            }
-//
-//
-//            // todo: put in method
-//            // find minimal utility
-//
-//            HashMap<Action,Double> minimalActionWithUtility = findMinimalAction(actionUtilities,currentState);
-//            Action minimalAction = (Action)minimalActionWithUtility.keySet().toArray()[0];
-//            Double minimalUtility= minimalActionWithUtility.get(minimalAction);
-//
-//
-//            Double stopCondition = epsilon * (1 - discountFactor) / discountFactor;
-//
-//
-//            Double prevUtility = currentState.getPreviousUtility();
-//            Double diffUtility = Math.abs(minimalUtility - prevUtility);
-//            // max diff per ALL states ... //
-//            if (maxLambda > diffUtility) {
-//                maxLambda = diffUtility;
-//            }
-//            if (maxLambda < stopCondition) {
-//                break;
-//            }
-//
-//            // todo: set utility for state per iteration. Ui+1(s) how?...
-//            // U(s)i+1 <- max(MDPModel.Action)sigma(P(s/s',a)(R(s,s',a)+U(s'))
-//            // todo: calc delta. how?
-//
-//
-//            //  find all actions of this source;
-//            //  calc their joined tohelet for Reward(src.agentLoc,dst.agentLoc) + Ui(s')
-//            // return new MDPModel.MDP recuresively for each stage
-//            // until |Ui+1(s) - Ui(s)|<epsilon
-//
-//
-//            //prevMDP = currentMDP;
-//
-//            Double previousUtility = currentState.getUtility();
-//            currentState.setPreviousUtility(previousUtility);
-//
-//            // Ui+1<-R(S)+discount*Min(P(s|s') * U(s'))
-//            Double minimalUtilityWithReward = minimalAction.getReward()+ discountFactor *minimalUtility;
-//            currentState.setUtility(minimalUtilityWithReward);
-//            currentState.setBestAction(minimalAction);
-//
-//            System.out.println("----current state:"+currentState+"-----");
-//           // System.out.println("----Minimal action:"+minimalAction+"-----minimalUtility:"+minimalUtility);
-//
-//        }
-//
-//        System.out.println(currentMDP.states.values().stream().map(state->state.getBestAction()).collect(Collectors.toList()));
-//        return currentMDP;
 
     public MDP setOptimalPolicy(MDP currentMDP) {
 
@@ -162,29 +57,6 @@ public class UtilityCalculator {
         return currentMDP;
 
     }
-
-//    private HashMap<Action,Double> findMinimalAction(HashMap<Action,Double> actionUtilities,State currentState){
-//        Action minimalAction = null;
-//        Double minimalUtility= null;
-//
-//        for(Action action: actionUtilities.keySet()) {
-//            if (currentState.getAgentLocation().getId() == action.getSrc().getId()) {
-//
-//                Double actionUtility = actionUtilities.get(action);
-//                if(minimalAction == null || minimalUtility > actionUtility){
-//                    minimalAction = action;
-//                    minimalUtility = actionUtility;
-//                }
-//
-//            }
-//        }
-//
-//        HashMap<Action,Double> results = new HashMap<Action,Double>();
-//
-//        System.out.println(minimalAction+"|||"+minimalUtility);
-//        results.put(minimalAction,minimalUtility);
-//        return results;
-//    }
 
     /**
      * Method to return list of actions with updated utility.
@@ -276,23 +148,29 @@ public class UtilityCalculator {
 
        if(!stateActionsFiltered.isEmpty()){
            Integer actionIndex = stateActionsFiltered.size()-1;
-           minimalUtilityAction =  (Action)stateActionsFiltered.toArray()[actionIndex]; //findMinimalUnblockedAction( state,  actionIndex ,
-                  // stateActionsFiltered);
-           minimalUtility = minimalUtilityAction.actionUtility;
+           minimalUtilityAction =  findMinimalUnblockedAction( state,  actionIndex ,
+            stateActionsFiltered);
+           minimalUtility = minimalUtilityAction!=null ? minimalUtilityAction.actionUtility : 0.0;
        }
 
-        System.out.println("++++Current Best action to set for state:"+state.getStateId()+" is :"+minimalUtilityAction);
+        System.out.println("++++ Current Best action to set for state:"+state.getStateId()+" Is :"+minimalUtilityAction);
         state.setPreviousUtility(state.getUtility());
         state.setUtility(minimalUtility);
         state.setBestAction(minimalUtilityAction);
     }
 
     private Action findMinimalUnblockedAction(State state, Integer actionIndex ,Set<Action> stateActionsFiltered){
-        Map<String,MDPStatusEdge> stateStatusedEdges = state.edgeStatuses;
+        Vector<MDPStatusEdge> stateStatusedEdges = state.edgeStatuses;
         Action currentAction = (Action)stateActionsFiltered.toArray()[actionIndex];
-        while(actionIndex > -1 && stateStatusedEdges.get(currentAction.getActionId()).getStatus() == BlockingStatus.Closed){
+        Map<String,MDPStatusEdge> statuses = CollectionUtils.mdpEdgeToMap(stateStatusedEdges);
+        while(actionIndex > 0 && statuses.get(currentAction.getActionId()).getStatus() == BlockingStatus.Closed){
             actionIndex--;
             currentAction = (Action)stateActionsFiltered.toArray()[actionIndex];
+        }
+        // IF found no possible valid action due to action blockings...
+        if(actionIndex == 0 && statuses.get(currentAction.getActionId()).getStatus() == BlockingStatus.Closed){
+            System.out.println("Found no valid action due to action blockings - returning null! For state:"+state.getStateId());
+            return null;
         }
         return currentAction;
     }

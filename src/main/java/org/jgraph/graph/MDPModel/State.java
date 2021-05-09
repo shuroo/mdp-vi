@@ -2,7 +2,6 @@ package org.jgraph.graph.MDPModel;
 
 import logic.CollectionUtils;
 
-import java.util.Map;
 import java.util.Vector;
 
 public class State  {
@@ -36,7 +35,7 @@ public class State  {
     }
 
     private Double previousUtility = 1000.0;
-    private Double minimalUtility = 1000.0;
+    private Double minimalUtility = 100.0;
 
     public Double getStateProbability() {
         return stateProbability;
@@ -45,17 +44,17 @@ public class State  {
     // The probability to occur - based on which edges are currently opened or closed in the current state and thier probsbilities.
     Double stateProbability;
 
-    public Map<String,MDPStatusEdge> getEdgeStatuses() {
+    public Vector<MDPStatusEdge> getEdgeStatuses() {
         return edgeStatuses;
     }
 
     // Vector of edgeStatuses
-    Map<String,MDPStatusEdge> edgeStatuses;
+    Vector<MDPStatusEdge> edgeStatuses;
 
     private void setStateId() {
         StringBuilder uniqueStateStr = new StringBuilder();
         uniqueStateStr.append("Ag_Location::"+this.agentLocation+",");
-        for (MDPStatusEdge status : edgeStatuses.values()) {
+        for (MDPStatusEdge status : edgeStatuses) {
             uniqueStateStr.append(status.toString()+",");
         }
         stateId = Constants.statePrefix + uniqueStateStr.toString();
@@ -82,7 +81,7 @@ public class State  {
     public State(MDPVertex agentLocation, Vector<MDPStatusEdge> edgeStatusVector, Double stateProbability) {
         this.agentLocation = agentLocation;
         CollectionUtils cu = new CollectionUtils();
-        this.edgeStatuses = cu.mdpEdgeToMap(edgeStatusVector);
+        this.edgeStatuses = edgeStatusVector;
         this.stateProbability = stateProbability;
         setStateId();
     }
@@ -95,9 +94,4 @@ public class State  {
         .getStateProbability()+"|";
     }
 
-
-//    @Override
-//    public String keyMap() {
-//        return getStateId();
-//    }
 }
