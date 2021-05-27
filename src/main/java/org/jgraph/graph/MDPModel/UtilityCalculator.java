@@ -64,7 +64,7 @@ public class UtilityCalculator {
             }
 
             currentMDP.getStates().values().stream().forEach(state -> {
-                System.out.println("**** Final Set for state:" + state.toString());
+                System.out.println("State:" + state.toString());
             });
 
         }

@@ -2,6 +2,7 @@ package org.jgraph.graph.MDPModel;
 
 import logic.CollectionUtils;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 public class State  {
@@ -54,8 +55,12 @@ public class State  {
     private void setStateId() {
         StringBuilder uniqueStateStr = new StringBuilder();
         uniqueStateStr.append("Ag_Location::"+this.agentLocation+",");
-        for (MDPStatusEdge status : edgeStatuses) {
-            uniqueStateStr.append(status.toString()+",");
+        Iterator<MDPStatusEdge> statusIterator  = edgeStatuses.iterator();
+        while(statusIterator.hasNext()) {
+            uniqueStateStr.append(statusIterator.next().toString());
+            if(statusIterator.hasNext()){
+                uniqueStateStr.append(",");
+            }
         }
         stateId = Constants.statePrefix + uniqueStateStr.toString();
     }
@@ -90,8 +95,7 @@ public class State  {
     @Override
     public String toString(){
 
-        return "|AgentLocation:"+this.getAgentLocation()+"|BestAction:"+this.bestAction+"|StateUtility:"+this.minimalUtility+"|StateProbability:"+this
-        .getStateProbability()+"|Statuses:"+getStateId();
+        return "|AgentLocation:"+this.getAgentLocation()+"|Statuses:"+getStateId();
     }
 
 }

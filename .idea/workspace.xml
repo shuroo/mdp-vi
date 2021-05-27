@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="735ee8a4-142c-4923-9762-4c9a1ecef6f2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/logic/GraphToMDP/GraphReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logic/GraphToMDP/GraphReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/Action.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/State.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/UtilityCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/UtilityCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/jgraph/graph/MDPModel/Action.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/jgraph/graph/MDPModel/Action.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/jgraph/graph/MDPModel/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/jgraph/graph/MDPModel/State.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/jgraph/graph/MDPModel/UtilityCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/jgraph/graph/MDPModel/UtilityCalculator.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -18,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/logic/GraphToMDP/GraphReader.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/UtilityCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+            <state relative-caret-position="300">
+              <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -31,23 +33,41 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphs_data/dror_data/thumbnail_CTPExample3.jpg">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/Action.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#225#226#0" expanded="true" />
+                <element signature="e#334#335#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphs_data/very_basic_mdp_example_graphs/very_simple_graph_18_states.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/UtilityCalculator.java">
+        <entry file="file://$PROJECT_DIR$/graphs_data/very_basic_mdp_example_graphs/very_simple_example_18_states.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="179" selection-start-line="179" selection-end-line="179" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/MDP.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphs_data/default_graph_example.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
@@ -55,16 +75,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="93" column="56" selection-start-line="93" selection-start-column="56" selection-end-line="93" selection-end-column="56" />
+            <state relative-caret-position="289">
+              <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#148#149#0" expanded="true" />
                 <element signature="e#178#179#0" expanded="true" />
-                <element signature="e#1579#1580#0" expanded="true" />
-                <element signature="e#1616#1617#0" expanded="true" />
-                <element signature="e#1669#1670#0" expanded="true" />
-                <element signature="e#1721#1722#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,37 +96,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/Action.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
-              <folding>
-                <element signature="e#334#335#0" expanded="true" />
-                <element signature="e#584#585#0" expanded="true" />
-                <element signature="e#652#653#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/MDPVertex.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-              <folding>
-                <element signature="e#280#281#0" expanded="true" />
-                <element signature="e#310#311#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/logic/GraphToMDP/CollectionUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="19" column="68" selection-start-line="19" selection-start-column="68" selection-end-line="19" selection-end-column="68" />
+            <state relative-caret-position="240">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -119,14 +108,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/jgrapht/graph/Graph.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/logic/GraphToMDP/GraphReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+            <state relative-caret-position="175">
+              <caret line="44" column="44" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1036#1037#0" expanded="true" />
-                <element signature="e#1078#1079#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,8 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>toS</find>
-      <find>toStr</find>
       <find>flattenList</find>
       <find>toString</find>
       <find>collectionToMap</find>
@@ -171,9 +156,11 @@
       <find>Current Best action to set for stat</find>
       <find>Current Best action to set for state</find>
       <find>Found no valid action due to action blockings</find>
-      <find>main</find>
       <find>100</find>
       <find>minimalU</find>
+      <find>main</find>
+      <find>AgentLocation:</find>
+      <find>Final Set for state</find>
     </findStrings>
     <replaceStrings>
       <replace>blockingProbability</replace>
@@ -234,8 +221,8 @@
         <option value="$PROJECT_DIR$/src/main/java/logic/GraphToMDP/CollectionI.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/MDPStatusEdge.java" />
         <option value="$PROJECT_DIR$/src/main/java/logic/GraphToMDP/MDPCreator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/Action.java" />
         <option value="$PROJECT_DIR$/src/main/java/logic/GraphToMDP/CollectionUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/Action.java" />
         <option value="$PROJECT_DIR$/src/main/java/logic/GraphToMDP/GraphReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/State.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/UtilityCalculator.java" />
@@ -254,7 +241,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -327,10 +313,11 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1620601555935" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1622119813235" />
     <property name="last_opened_file_path" value="$USER_HOME$/Dev/Backend/informer" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -501,7 +488,7 @@
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3160415" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13886672" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -513,13 +500,13 @@
       <window_info id="Job Explorer" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3485342" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.4315961" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23615634" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4315961" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="DB Execution Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32899022" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32792208" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32899022" />
       <window_info anchor="bottom" id="Console" order="10" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -872,13 +859,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/MDP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/logic/GraphToMDP/CollectionI.java" />
     <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/util/List.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -931,38 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/Action.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
-          <folding>
-            <element signature="e#334#335#0" expanded="true" />
-            <element signature="e#584#585#0" expanded="true" />
-            <element signature="e#652#653#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/logic/GraphToMDP/CollectionUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="19" column="68" selection-start-line="19" selection-start-column="68" selection-end-line="19" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphs_data/very_basic_mdp_example_graphs/very_simple_graph_18_states.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphs_data/very_basic_mdp_example_graphs/very_simple_example_18_states.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/MDPEdge.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -976,6 +924,39 @@
     <entry file="file://$PROJECT_DIR$/graphs_data/dror_data/CTPExample2.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/graphs_data/dror_data/thumbnail_CTPExample3.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/Action.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#225#226#0" expanded="true" />
+            <element signature="e#334#335#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphs_data/very_basic_mdp_example_graphs/very_simple_graph_18_states.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphs_data/very_basic_mdp_example_graphs/very_simple_example_18_states.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/MDP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphs_data/default_graph_example.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/graphs_data/dror_data/second_graph.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -983,13 +964,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphs_data/dror_data/thumbnail_CTPExample3.jpg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/logic/GraphToMDP/CollectionUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/logic/GraphToMDP/GraphReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        <state relative-caret-position="175">
+          <caret line="44" column="44" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -998,32 +986,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="93" column="56" selection-start-line="93" selection-start-column="56" selection-end-line="93" selection-end-column="56" />
+        <state relative-caret-position="289">
+          <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#148#149#0" expanded="true" />
             <element signature="e#178#179#0" expanded="true" />
-            <element signature="e#1579#1580#0" expanded="true" />
-            <element signature="e#1616#1617#0" expanded="true" />
-            <element signature="e#1669#1670#0" expanded="true" />
-            <element signature="e#1721#1722#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/jgraph/graph/MDPModel/UtilityCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="179" selection-start-line="179" selection-end-line="179" />
+        <state relative-caret-position="300">
+          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphs_data/default_graph_example.png">
-      <provider selected="true" editor-type-id="images" />
     </entry>
   </component>
   <component name="masterDetails">

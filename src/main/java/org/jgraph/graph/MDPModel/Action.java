@@ -50,15 +50,6 @@ public class Action implements Comparable<Action> {
         return dst;
     }
 
-//    public MDPModel.Action(MDPModel.MDPVertex src, MDPModel.MDPVertex dst, Double reward){
-//            this.src = src;
-//            this.dst = dst;
-//            this.reward = reward;
-////            actionEdge = new MDPModel.MDPEdge(src,dst,reward,)
-//            actionId = generateActionId(src,dst);
-//    }
-
-
     public String getActionId() {
         return actionId;
     }
