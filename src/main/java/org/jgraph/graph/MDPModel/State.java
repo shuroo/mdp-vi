@@ -62,7 +62,7 @@ public class State  {
                 uniqueStateStr.append(",");
             }
         }
-        stateId = Constants.statePrefix + uniqueStateStr.toString();
+        stateId = uniqueStateStr.toString();
     }
 
 
@@ -95,7 +95,7 @@ public class State  {
     @Override
     public String toString(){
 
-        return "|AgentLocation:"+this.getAgentLocation()+"|Statuses:"+getStateId();
+        return "<"+this.getStateId()+">";
     }
 
 }
